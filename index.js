@@ -51,3 +51,16 @@ app.post("/api/post/submit", (req, res) => {
       res.status(400).json({ success: false });
     });
 });
+
+app.post("/api/post/list", (req, res) => {
+  // MongoDB에서 document를 찾는 명령어 : find
+  // find 명령어가 끝나면(exec) 찾은 명령어(doc)
+  Post.find()
+    .exec()
+    .then((doc) => {
+      res.status(200).json({ success: true, postList: doc });
+    })
+    .catch((error) => {
+      res.status(400).json({ success: false });
+    });
+});
