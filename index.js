@@ -40,9 +40,14 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
-app.post("/api/test", (req, res) => {
-  const CoummunityPost = new Post({ title: "test", content: "테스트입니다!" });
-  CoummunityPost.save().then(() => {
-    res.status(200).json({ success: true });
-  });
+app.post("/api/post/submit", (req, res) => {
+  let temp = req.body;
+  const CoummunityPost = new Post(temp);
+  CoummunityPost.save()
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch((error) => {
+      res.status(400).json({ success: false });
+    });
 });
