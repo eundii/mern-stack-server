@@ -81,3 +81,15 @@ app.post("/api/post/list", (req, res) => {
       res.status(400).json({ success: false });
     });
 });
+
+app.post("/api/post/detail", (req, res) => {
+  Post.findOne({ postNum: Number(req.body.postNum) })
+    .exec()
+    .then((doc) => {
+      console.log(doc);
+      res.status(200).json({ success: true, post: doc });
+    })
+    .catch((error) => {
+      res.status(400).json({ success: false });
+    });
+});
