@@ -93,3 +93,18 @@ app.post("/api/post/detail", (req, res) => {
       res.status(400).json({ success: false });
     });
 });
+
+app.post("/api/post/edit", (req, res) => {
+  let temp = {
+    title: req.body.title,
+    content: req.body.content,
+  };
+  Post.updateOne({ postNum: Number(req.body.postNum) }, { $set: temp })
+    .exec()
+    .then((doc) => {
+      res.status(200).json({ success: true });
+    })
+    .catch((error) => {
+      res.status(400).json({ success: false });
+    });
+});
