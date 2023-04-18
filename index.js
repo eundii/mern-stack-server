@@ -6,6 +6,10 @@ const app = express();
 const port = 5000;
 
 app.use(express.static(path.join(__dirname, "../client/build")));
+
+// express에게 image 폴더를 사용하겠다고 선언해주기
+app.use("/image", express.static("./image"));
+
 // client에서 보내는 body에 대한 명령어를 추적할 수 있게 설정
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
