@@ -51,7 +51,6 @@ router.post("/detail", (req, res) => {
   Post.findOne({ postNum: Number(req.body.postNum) })
     .exec()
     .then((doc) => {
-      console.log(doc);
       res.status(200).json({ success: true, post: doc });
     })
     .catch((error) => {
