@@ -5,6 +5,7 @@ const router = express.Router();
 const { Post } = require("../Model/Post.js");
 const { Counter } = require("../Model/Counter.js");
 
+const setUpload = require("../util/upload.js");
 router.post("/submit", (req, res) => {
   let temp = req.body;
   // Counter 모델에서 postNum을 찾기
@@ -85,6 +86,7 @@ router.post("/edit", (req, res) => {
     });
 });
 
+/*
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "image/");
@@ -105,5 +107,14 @@ router.post("/image/upload", (req, res) => {
     }
   });
 });
+*/
+
+router.post(
+  "/image/upload",
+  setUpload("eundii-community/post"),
+  (req, res, next) => {
+    res.status(200).json({ success: true, filePath: res.req.file.location });
+  }
+);
 
 module.exports = router;

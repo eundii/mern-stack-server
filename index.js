@@ -5,6 +5,9 @@ const mongoose = require("mongoose");
 const app = express();
 const port = 5000;
 
+// key 불러오기
+const config = require("./config/key.js");
+
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 // express에게 image 폴더를 사용하겠다고 선언해주기
@@ -21,9 +24,7 @@ app.use("/api/post", require("./Router/post.js"));
 app.listen(port, () => {
   // 서버가 열리면 몽구스 디비를 연결
   mongoose
-    .connect(
-      "mongodb+srv://eundii:1q2w3e4r@eundii.cqizn6z.mongodb.net/Community?retryWrites=true&w=majority"
-    )
+    .connect(config.mongoURI)
     .then(() => {
       console.log(
         `Example app listening on port ${port}, http://localhost:${port}`
