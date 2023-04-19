@@ -19,6 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // 공통적으로 사용하는 /api/post 부분을 빼주고 나머지를 post.js 에서 불러옴
 app.use("/api/post", require("./Router/post.js"));
+// 공통적으로 사용하는 /api/user 부분을 빼주고 나머지를 user.js 에서 불러옴
+app.use("/api/user", require("./Router/user.js"));
 
 // 서버 열기
 app.listen(port, () => {
